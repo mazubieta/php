@@ -41,3 +41,13 @@ func (f *formatWalker) printEcho(node *ast.EchoStmt) error {
 	f.print("\n")
 	return nil
 }
+
+func (f *formatWalker) printAssignmentExpression(node *ast.AssignmentExpression) error {
+	f.printTab()
+	f.Walk(node.Assignee)
+	f.print(" ")
+	f.print(node.Operator)
+	f.print(" ")
+	f.Walk(node.Value)
+	return nil
+}

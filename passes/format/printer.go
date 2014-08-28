@@ -16,6 +16,10 @@ func (f *formatWalker) Walk(node ast.Node) error {
 
 func (f *formatWalker) printNode(node ast.Node) {
 	switch n := node.(type) {
+	case *ast.AssignmentExpression:
+		f.printAssignmentExpression(n)
+	case ast.AssignmentExpression:
+		f.printAssignmentExpression(&n)
 	case ast.ExpressionStmt:
 		f.Walk(n.Expression)
 		f.printToken(token.StatementEnd)
