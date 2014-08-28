@@ -20,6 +20,10 @@ func (f *formatWalker) printNode(node ast.Node) {
 		f.printAssignmentExpression(n)
 	case ast.AssignmentExpression:
 		f.printAssignmentExpression(&n)
+	case *ast.OperatorExpression:
+		f.printOperatorExpression(n)
+	case ast.OperatorExpression:
+		f.printOperatorExpression(&n)
 	case ast.ExpressionStmt:
 		f.Walk(n.Expression)
 		f.printToken(token.StatementEnd)

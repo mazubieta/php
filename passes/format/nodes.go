@@ -42,6 +42,23 @@ func (f *formatWalker) printEcho(node *ast.EchoStmt) error {
 	return nil
 }
 
+func (f *formatWalker) printOperatorExpression(node *ast.OperatorExpression) error {
+	f.printTab()
+	switch op := node.Operator; op {
+	case "==":
+		f.Walk(node.Operand1)
+		f.print(" == ")
+		f.Walk(node.Operand2)
+	case "?:":
+		f.Walk(node.Operand1)
+		f.print(" ? ")
+		f.Walk(node.Operand2)
+		f.print(" : ")
+		f.Walk(node.Operand3)
+	}
+	return nil
+}
+
 func (f *formatWalker) printAssignmentExpression(node *ast.AssignmentExpression) error {
 	f.printTab()
 	f.Walk(node.Assignee)
